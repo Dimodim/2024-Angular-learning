@@ -21,6 +21,18 @@ export class TableEffects {
     )
   );
 
+  getMovies$: Observable<Action> = createEffect(() =>
+  this._actions$.pipe(
+    ofType(fromActions.getMovies),
+    mergeMap(() =>
+      this._tableService.getPopularMovies().pipe(
+        map((response) => fromActions.getMoviesSuccess({ payload: response })),
+        catchError((error)=> of(fromActions.getMoviesFailed({payload: error})))
+      )
+    )
+  )
+);
+
   constructor(
     private _actions$: Actions,
     private _tableService: TableService){}

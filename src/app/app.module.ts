@@ -13,6 +13,7 @@ import { TablePageComponent } from './components/table-page/table-page.component
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormPageComponent } from './components/form-page/form-page.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, TablePageComponent, FormPageComponent],
@@ -22,6 +23,7 @@ import { FormPageComponent } from './components/form-page/form-page.component';
     BrowserAnimationsModule,
     MatTableModule,
     MatInputModule,
+    HttpClientModule,
     ReactiveFormsModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
