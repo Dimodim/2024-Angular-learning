@@ -24,7 +24,7 @@ export class TableService {
     return request;
   }
 
-  getMovieDetails(id: string): Observable<MovieDetails> {
+  getMovieDetails(id: number): Observable<MovieDetails> {
     const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US&api_key=${this.apiKey}`;
 
     return this.cacheService.getData<MovieDetails>(url, () =>
