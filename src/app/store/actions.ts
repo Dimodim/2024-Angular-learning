@@ -23,6 +23,6 @@ export const getMovieDetailsFailed = createAction(
   props<{ payload: any }>()
 );
 
-export const clearMovieDetailsCashe = createAction(
-  '[Details] Clear Movie Details Cashe'
+export const clearMovieDetailsCache = createAction(
+  '[Details] Clear Movie Details Cache'
 );

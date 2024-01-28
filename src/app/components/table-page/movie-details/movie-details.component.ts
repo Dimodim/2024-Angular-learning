@@ -33,6 +33,6 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   bustCashe() {
-    this._store.dispatch(fromStore.clearMovieDetailsCashe());
+    this._store.dispatch(fromStore.clearMovieDetailsCache());
   }
 }

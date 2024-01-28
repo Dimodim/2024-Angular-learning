@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { createMovie } from 'src/shared/mocks/factories/movie.factory';
 
-fdescribe('TablePageComponent', () => {
+describe('TablePageComponent', () => {
   let component: TablePageComponent;
   let fixture: ComponentFixture<TablePageComponent>;
   let store: MockStore<fromStore.IState>;
@@ -80,13 +80,13 @@ fdescribe('TablePageComponent', () => {
     expect(language.nativeElement.textContent).toContain(
       data.original_language
     );
-    expect(selectElement('#naviagate-button-0').textContent).toContain('Details');
+    expect(selectElement('#navigate-button-0').textContent).toContain('Details');
   });
 
   it('should navigate on details button click', () => {
     const navigateSpy = jest.spyOn(router, 'navigate');
 
-    selectElement('#naviagate-button-0').click();
+    selectElement('#navigate-button-0').click();
 
     expect(navigateSpy).toHaveBeenCalledWith(['movies/1']);
   });

@@ -3,8 +3,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
-    "types": ["jest","node"]
+    "types": ["jasmine","node"]
   },
-  "include": ["**/*.spec.jest.ts"],
-  "exclude": ["e2e/**/*.ts"]
+  "include": ["e2e/**/*.ts","**/*.spec.ts"]
 }

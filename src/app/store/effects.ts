@@ -45,7 +45,7 @@ export class TableEffects {
   clearMovieDetailsCashe$: Observable<Action> = createEffect(
     () =>
       this._actions$.pipe(
-        ofType(fromActions.clearMovieDetailsCashe),
+        ofType(fromActions.clearMovieDetailsCache),
         tap(() => this._casheService.clearCache())
       ),
     { dispatch: false }
