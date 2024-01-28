@@ -1,11 +1,12 @@
 import { Action } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { TableService } from '../../services/table.service';
 
 import * as fromActions from './actions';
+import { CacheService } from 'src/services/cashe.service';
 
 @Injectable()
 export class TableEffects {
@@ -41,8 +42,18 @@ export class TableEffects {
     )
   );
 
+  clearMovieDetailsCashe$: Observable<Action> = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(fromActions.clearMovieDetailsCashe),
+        tap(() => this._casheService.clearCache())
+      ),
+    { dispatch: false }
+  );
+
   constructor(
     private _actions$: Actions,
-    private _tableService: TableService
+    private _tableService: TableService,
+    private _casheService: CacheService
   ) {}
 }

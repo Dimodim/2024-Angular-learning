@@ -1,4 +1,5 @@
-<button (click)="onBackClick()">Back</button>
+<button id="navigate-button" mat-button (click)="onBackClick()">Back</button>
+<button id="clear-cashe-button" mat-button (click)="bustCashe()">Bust Cashe</button>
 <div class="movie-details-container" *ngIf="state$ | async as state">
   <div
     class="backdrop-image"
@@ -16,7 +17,7 @@
     </div>
 
     <div class="movie-info">
-      <h1>{{ state.title }}</h1>
+      <h1 id="title">{{ state.title }}</h1>
 
       <div class="rating-votes">
         <span class="rating">Rating: {{ state.vote_average }}/10</span>

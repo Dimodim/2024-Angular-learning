@@ -31,4 +31,8 @@ export class MovieDetailsComponent implements OnInit {
   onBackClick() {
     this._router.navigate([`movies`]);
   }
+
+  bustCashe() {
+    this._store.dispatch(fromStore.clearMovieDetailsCashe());
+  }
 }

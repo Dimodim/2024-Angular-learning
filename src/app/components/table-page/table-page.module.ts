@@ -4,6 +4,7 @@ import { TablePageComponent } from './table-page.component';
 import { TablePageRoutingModule } from './table-page-routing.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     TablePageRoutingModule,
     MatTableModule,
     MatIconModule,
+    MatButtonModule,
   ],
   declarations: [TablePageComponent, MovieDetailsComponent],
 })

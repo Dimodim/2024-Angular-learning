@@ -11,7 +11,6 @@ import { Movie } from 'src/shared/models/movies.model';
 import { MovieDetails } from 'src/shared/models/movie-details';
 
 export interface IState {
-  tableData: Array<TabelItem>;
   movies: Array<Movie>;
   movieDetails: MovieDetails | null;
   errorText: string;
@@ -19,7 +18,6 @@ export interface IState {
 }
 
 export const tableInitialState: IState = {
-  tableData: [],
   movies: [],
   movieDetails: null,
   loading: false,
@@ -28,19 +26,6 @@ export const tableInitialState: IState = {
 
 export const tableReducer = createReducer(
   tableInitialState,
-  on(fromActions.getTableResults, (state) => ({
-    ...state,
-    loading: true,
-  })),
-  on(fromActions.getTableResultsSuccess, (state, { payload }) => ({
-    ...state,
-    tableData: payload,
-  })),
-  on(fromActions.getTableResultsFailed, (state, { payload }) => ({
-    ...state,
-    errorText: payload,
-  })),
-
   on(fromActions.getMovies, (state) => ({
     ...state,
     loading: true,

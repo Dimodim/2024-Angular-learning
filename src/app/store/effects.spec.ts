@@ -4,7 +4,8 @@ import { of, throwError } from 'rxjs';
 import { TableEffects } from './effects';
 import { TableService } from '../../services/table.service';
 import { errorMessage } from '../../shared/mocks/messages/messages';
-import { createTableItem } from '../../shared/mocks/factories';
+import { createMovie } from 'src/shared/mocks/factories/movie.factory';
+import { createMovieDetails } from 'src/shared/mocks/factories/movie-details.factory';
 
 import * as fromActions from './actions';
 
@@ -21,7 +22,8 @@ describe('TableEffects', () => {
         {
           provide: TableService,
           useValue: {
-            getTableResults: jest.fn(),
+            getPopularMovies: jest.fn(),
+            getMovieDetails: jest.fn(),
           },
         },
       ],
@@ -31,26 +33,62 @@ describe('TableEffects', () => {
     tableService = TestBed.inject(TableService) as jest.Mocked<TableService>;
   });
 
-  it('should return getTableResultsSuccess on successful API call', (done) => {
-    const mockResponse = [createTableItem()];
-    tableService.getTableResults.mockReturnValue(of(mockResponse));
+  it('should return getMoviesSuccess on successful API call', (done) => {
+    const mockMovies = [createMovie()];
 
-    actions = of(fromActions.getTableResults());
+    actions = of(fromActions.getMovies());
+    tableService.getPopularMovies.mockReturnValue(of(mockMovies));
 
-    effects.getTradingPartnersList$.subscribe((result) => {
-      expect(result).toEqual(fromActions.getTableResultsSuccess({ payload: mockResponse }));
+    effects.getMovies$.subscribe((result) => {
+      expect(result).toEqual(
+        fromActions.getMoviesSuccess({ payload: mockMovies })
+      );
+      expect(tableService.getPopularMovies).toHaveBeenCalled();
       done();
     });
   });
 
-  it('should return getTableResultsFailed on API call failure', (done) => {
-    
-    tableService.getTableResults.mockReturnValue(throwError(()=>errorMessage));
+  it('should return getMoviesFailed on failed API call', (done) => {
+    actions = of(fromActions.getMovies());
+    tableService.getPopularMovies.mockReturnValue(
+      throwError(() => errorMessage)
+    );
 
-    actions = of(fromActions.getTableResults());
+    effects.getMovies$.subscribe((result) => {
+      expect(result).toEqual(
+        fromActions.getMoviesFailed({ payload: errorMessage })
+      );
+      expect(tableService.getPopularMovies).toHaveBeenCalled();
+      done();
+    });
+  });
 
-    effects.getTradingPartnersList$.subscribe((result) => {
-      expect(result).toEqual(fromActions.getTableResultsFailed({ payload: errorMessage }));
+  it('should return getMovieDetailsSuccess on successful API call', (done) => {
+    const mockMovie = createMovieDetails();
+
+    actions = of(fromActions.getMovieDetails({ payload: '1' }));
+    tableService.getMovieDetails.mockReturnValue(of(mockMovie));
+
+    effects.getMovieDetails$.subscribe((result) => {
+      expect(result).toEqual(
+        fromActions.getMovieDetailsSuccess({ payload: mockMovie })
+      );
+      expect(tableService.getMovieDetails).toHaveBeenCalled();
+      done();
+    });
+  });
+
+  it('should return getMovieDetailsFailed on failed API call', (done) => {
+    actions = of(fromActions.getMovieDetails({ payload: '1' }));
+    tableService.getMovieDetails.mockReturnValue(
+      throwError(() => errorMessage)
+    );
+
+    effects.getMovieDetails$.subscribe((result) => {
+      expect(result).toEqual(
+        fromActions.getMovieDetailsFailed({ payload: errorMessage })
+      );
+      expect(tableService.getMovieDetails).toHaveBeenCalled();
       done();
     });
   });
