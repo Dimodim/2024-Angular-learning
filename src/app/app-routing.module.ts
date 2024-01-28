@@ -1,26 +1,33 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TablePageComponent } from './components/table-page/table-page.component';
-import { FormPageComponent } from './components/form-page/form-page.component';
+import { HomePageCopmonent } from './components/home-page/home-page.component';
+import { PreloadStrategyService } from 'src/services/preloading-strategy.service';
 
 const routes: Routes = [
   {
     path: '',
-    component: TablePageComponent
+    component: HomePageCopmonent,
   },
   {
-    path: 'form-page/:id',
-    component: FormPageComponent
+    path: 'movies',
+    loadChildren: () =>
+      import('./components/table-page/table-page.module').then(
+        (m) => m.TablePageModule
+      ),
+    data: { preload: true }
   },
   {
     path: '**',
-    component: TablePageComponent
+    component: HomePageCopmonent,
   },
-
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadStrategyService,
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

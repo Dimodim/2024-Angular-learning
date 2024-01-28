@@ -8,10 +8,12 @@ import {
 import * as fromActions from './actions';
 import { TabelItem } from '../../shared/models/tabel-item.model';
 import { Movie } from 'src/shared/models/movies.model';
+import { MovieDetails } from 'src/shared/models/movie-details';
 
 export interface IState {
   tableData: Array<TabelItem>;
   movies: Array<Movie>;
+  movieDetails: MovieDetails | null;
   errorText: string;
   loading: boolean;
 }
@@ -19,6 +21,7 @@ export interface IState {
 export const tableInitialState: IState = {
   tableData: [],
   movies: [],
+  movieDetails: null,
   loading: false,
   errorText: '',
 };
@@ -49,6 +52,18 @@ export const tableReducer = createReducer(
   on(fromActions.getMoviesFailed, (state, { payload }) => ({
     ...state,
     errorText: payload,
+  })),
+  on(fromActions.getMovieDetails, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(fromActions.getMovieDetailsSuccess, (state, { payload }) => ({
+    ...state,
+    movieDetails: payload,
+  })),
+  on(fromActions.getMovieDetailsFailed, (state, { payload }) => ({
+    ...state,
+    errorText: payload,
   }))
 );
 
@@ -58,4 +73,9 @@ const selectFeature = createFeatureSelector<IState>('tableFeature');
 export const selectTableState = createSelector(
   selectFeature,
   (state) => state.movies
+);
+
+export const selectMovieDetailsState = createSelector(
+  selectFeature,
+  (state) => state.movieDetails
 );

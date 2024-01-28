@@ -19,3 +19,16 @@ export const getMoviesFailed = createAction(
   '[Table] Get Movies Failed',
   props<{ payload: any }>()
 );
+
+export const getMovieDetails = createAction(
+  '[Table] Get Movie Details',
+  props<{ payload: any }>()
+);
+export const getMovieDetailsSuccess = createAction(
+  '[Table] Get Movie Details Success',
+  props<{ payload: any }>()
+);
+export const getMovieDetailsFailed = createAction(
+  '[Table] Get Movie Details Failed',
+  props<{ payload: any }>()
+);

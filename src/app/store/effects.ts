@@ -9,31 +9,40 @@ import * as fromActions from './actions';
 
 @Injectable()
 export class TableEffects {
-  getTradingPartnersList$: Observable<Action> = createEffect(() =>
+  getMovies$: Observable<Action> = createEffect(() =>
     this._actions$.pipe(
-      ofType(fromActions.getTableResults),
+      ofType(fromActions.getMovies),
       mergeMap(() =>
-        this._tableService.getTableResults().pipe(
-          map((response) => fromActions.getTableResultsSuccess({ payload: response })),
-          catchError((error)=> of(fromActions.getTableResultsFailed({payload: error})))
+        this._tableService.getPopularMovies().pipe(
+          map((response) =>
+            fromActions.getMoviesSuccess({ payload: response })
+          ),
+          catchError((error) =>
+            of(fromActions.getMoviesFailed({ payload: error }))
+          )
         )
       )
     )
   );
 
-  getMovies$: Observable<Action> = createEffect(() =>
-  this._actions$.pipe(
-    ofType(fromActions.getMovies),
-    mergeMap(() =>
-      this._tableService.getPopularMovies().pipe(
-        map((response) => fromActions.getMoviesSuccess({ payload: response })),
-        catchError((error)=> of(fromActions.getMoviesFailed({payload: error})))
+  getMovieDetails$: Observable<Action> = createEffect(() =>
+    this._actions$.pipe(
+      ofType(fromActions.getMovieDetails),
+      mergeMap(({ payload }) =>
+        this._tableService.getMovieDetails(payload).pipe(
+          map((response) =>
+            fromActions.getMovieDetailsSuccess({ payload: response })
+          ),
+          catchError((error) =>
+            of(fromActions.getMovieDetailsFailed({ payload: error }))
+          )
+        )
       )
     )
-  )
-);
+  );
 
   constructor(
     private _actions$: Actions,
-    private _tableService: TableService){}
+    private _tableService: TableService
+  ) {}
 }

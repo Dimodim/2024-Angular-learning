@@ -1,0 +1,43 @@
+.movie-details-container {
+    position: relative;
+    color: #fff;
+  }
+  
+  .backdrop-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+    z-index: -1;
+  }
+  
+  .content {
+    display: flex;
+    padding: 20px;
+  }
+  
+  .poster img {
+    max-width: 200px;
+    border-radius: 10px;
+  }
+  
+  .movie-info {
+    margin-left: 20px;
+  }
+  
+  .rating-votes {
+    margin: 10px 0;
+  }
+  
+  .genres span {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+  }
+  

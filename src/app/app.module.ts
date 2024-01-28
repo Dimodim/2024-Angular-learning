@@ -12,11 +12,11 @@ import { TableEffects } from './store/effects';
 import { TablePageComponent } from './components/table-page/table-page.component';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormPageComponent } from './components/form-page/form-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomePageCopmonent } from './components/home-page/home-page.component';
 
 @NgModule({
-  declarations: [AppComponent, TablePageComponent, FormPageComponent],
+  declarations: [AppComponent, HomePageCopmonent],
   imports: [
     BrowserModule,
     AppRoutingModule,

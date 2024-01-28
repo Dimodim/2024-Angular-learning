@@ -1,0 +1,35 @@
+<button (click)="onBackClick()">Back</button>
+<div class="movie-details-container" *ngIf="state$ | async as state">
+  <div
+    class="backdrop-image"
+    [style.background-image]="
+      'url(https://image.tmdb.org/t/p/w185' + state.backdrop_path + ')'
+    "
+  ></div>
+
+  <div class="content">
+    <div class="poster">
+      <img
+        src="https://image.tmdb.org/t/p/w185{{ state.poster_path }}"
+        alt="Poster for {{ state.title }}"
+      />
+    </div>
+
+    <div class="movie-info">
+      <h1>{{ state.title }}</h1>
+
+      <div class="rating-votes">
+        <span class="rating">Rating: {{ state.vote_average }}/10</span>
+        <span class="votes">({{ state.vote_count }} votes)</span>
+      </div>
+
+      <div class="genres">
+        <span *ngFor="let genre of state.genres">{{ genre.name }}</span>
+      </div>
+
+      <div class="details">
+        <p>{{ state.overview }}</p>
+      </div>
+    </div>
+  </div>
+</div>
