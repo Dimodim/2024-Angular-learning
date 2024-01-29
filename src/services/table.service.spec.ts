@@ -54,27 +54,19 @@ describe('TableService', () => {
     });
   });
 
-  // describe('getMovieDetails', () => {
-  //   it('should use CacheService to get movie details', () => {
-  //     const movieId = 123;
-  //     const testUrl = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US&api_key=${environment.apiKey}`;
+  describe('getMovieDetails', () => {
+    it('should use CacheService to get movie details', () => {
+      const movieId = 123;
+      const testUrl = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US&api_key=${environment.apiKey}`;
 
-  //     // Call the getMovieDetails method
-  //     service.getMovieDetails(movieId).subscribe((details) => {
-  //       expect(details).toEqual(mockMovieDetails); // Verify the movie details
-  //     });
+      service.getMovieDetails(movieId).subscribe((details) => {
+        expect(details).toEqual(mockMovieDetails);
+      });
 
-  //     // Verify that the cacheService.getData spy was called with the correct arguments
-  //     expect(cacheService.getData).toHaveBeenCalledWith(
-  //       testUrl,
-  //       jasmine.any(Function)
-  //     );
-
-  //     // No need to expect an HTTP request since we are returning from cache
-  //     // httpTestingController.expectOne(...) not needed
-
-  //     // Ensure no outstanding HTTP requests
-  //     httpTestingController.verify();
-  //   });
-  // });
+      expect(cacheService.getData).toHaveBeenCalledWith(
+        testUrl,
+        jasmine.any(Function)
+      );
+    });
+  });
 });
